@@ -23,6 +23,10 @@ ul{
     padding: 0;
     list-style: none;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
 .badge-main {
     background-color: var(--secondary-font-color);
     color: var(--main-color);
@@ -92,7 +96,7 @@ ul{
     }
 }
 /* 
-    *MARK: navbar
+    * MARK: navbar
 */
 nav{
     width: 95%;
@@ -234,7 +238,7 @@ div.grid-container{
 
 
 /* 
-    *MARK: modal
+    * MARK: modal
 */
 
 .modal{
@@ -325,14 +329,12 @@ div.grid-container{
     row-gap: 10px;
     
 }
-
 .modal .modal-grid-container .description{
     grid-column: 1 / span 2;
     opacity: 50%;
     font-size: medium;
     padding: 5px;
 }
-
 .blur-layout{
     position: absolute;
     left: 0;
