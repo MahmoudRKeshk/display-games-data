@@ -108,21 +108,7 @@ a{
     transform: scale(1); /* Zoom in by 150% */
     }
 }
-@keyframes fall {
-    from {
-    top: -105%;
-    }
-    to {
-        top: 80px;
-    }
-}
-@keyframes fly {
-    from {
-        top: 80px;
-    }to{
-        top: -105%;
-    }
-}
+
 /* 
     * MARK: navbar
 */
@@ -392,6 +378,22 @@ div.grid-container{
     * MARK: responsive [md]
 */
 @media screen and (max-width:950px){
+    @keyframes fall {
+        from {
+        top: -105%;
+        }
+        to {
+            top: 80px;
+        }
+    }
+    @keyframes fly {
+        from {
+            top: 80px;
+        }to{
+            top: -105%;
+        }
+    }
+
     div.grid-container{
         grid-template-columns: repeat(2,1fr);
     }
