@@ -10,6 +10,7 @@ const drop_down_close = document.getElementById('drop-down-close');
 const nav_menu = document.getElementById('nav-menu');
 let menu_items = document.getElementsByClassName('nav-menu-item');
 let cardContainer = document.getElementById('card-container');
+let spinner_loader = document.getElementById('spinner-loader');
 let body = document.getElementById('body');
 
 export function runNavUserInterface(){
@@ -41,11 +42,12 @@ export function runDetailsUserInterface(){
     for(let i=0; i<cards.length; i++){
         cards[i].addEventListener('click', ()=>{
             let id = cards[i].dataset['id'] ;
-            
+            startLoadingAnimation();
             getDetails(id).then((data)=>{
                 let details = JSON.parse(data);
                 console.log(details);
                 fillModalwithDetails(details);
+                endLoadingAnimation();
                 showModal(modal);
                 const modal_close_icon = document.getElementById('modal-close-icon');
                 modal_close_icon.addEventListener('click',()=>{
@@ -58,10 +60,12 @@ export function runDetailsUserInterface(){
 }
 
 export function getAndDisplayDataByCategory(categoryName){
+    startLoadingAnimation();
     getData(categoryName).then((textResponse)=>{
         let data = JSON.parse(textResponse);
         displayCategoryData(data);
         runDetailsUserInterface();
+        endLoadingAnimation();
     })
 }
 
@@ -124,7 +128,6 @@ function displayCategoryData(data){
     });
     cardContainer.innerHTML = containerData;
 }
-
 function fillModalwithDetails(details){
     let modalContent = ``;
     modalContent = `
@@ -180,3 +183,13 @@ function showDropDownMenu(){
             nav_menu.classList.remove('show-fall');
         },500)
 }
+function startLoadingAnimation(){
+    showBlurLayer();
+    spinner_loader.classList.remove('d-none');
+}
+
+function endLoadingAnimation(){
+    hideBlurLayer();
+    spinner_loader.classList.add('d-none');
+}
+

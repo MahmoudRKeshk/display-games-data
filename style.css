@@ -65,6 +65,26 @@ a{
 .enable-scroll{
     overflow: auto;
 }
+.loader {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translateY(50%);
+    transform: translateX(50%);
+    border: 8px solid var(--main-font-color); 
+    border-top: 8px solid var(--secondary-font-color);
+    border-radius: 50%; 
+    width: 60px;
+    height: 60px;
+    z-index: 123456789;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 @keyframes zoomOut {
     from {
     opacity: 1;
