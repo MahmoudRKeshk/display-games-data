@@ -7,10 +7,10 @@ const modal = document.getElementById('modal');
 const blur_layer = document.getElementById('blur-layout');
 const drop_down_icon = document.getElementById('drop-down-icon');
 const drop_down_close = document.getElementById('drop-down-close');
-const nav_menu = document.getElementById('nav-menu') 
+const nav_menu = document.getElementById('nav-menu');
 let menu_items = document.getElementsByClassName('nav-menu-item');
 let cardContainer = document.getElementById('card-container');
-
+let body = document.getElementById('body');
 
 export function runNavUserInterface(){
     for(let i=0; i<menu_items.length; i++){
@@ -18,31 +18,20 @@ export function runNavUserInterface(){
             if(menu_items[i].classList.contains('active')){
             } else {
                 removeActiveClass(menu_items);
-                menu_items[i].classList.add('active')
+                menu_items[i].classList.add('active');
+                closeDropDownMenu();
             }
+
         })
     }
 }
 
 export function runDropdownUserInterface(){
     drop_down_icon.addEventListener('click', ()=>{
-        showBlurLayer();
-        nav_menu.classList.remove('closed')
-        nav_menu.classList.add('opened');
-        nav_menu.classList.add('show-fall');
-        setTimeout(()=>{
-            nav_menu.classList.remove('show-fall');
-        },500)
+        showDropDownMenu();
     });
-
     drop_down_close.addEventListener('click' , ()=>{
-        hideBlurLayer();
-        nav_menu.classList.add('closed');
-        nav_menu.classList.remove('opened')
-        nav_menu.classList.add('hide-fly');
-        setTimeout(()=>{
-            nav_menu.classList.remove('hide-fly');
-        }, 600)
+        closeDropDownMenu();
     })
 }
 
@@ -90,6 +79,7 @@ function removeActiveClass(list){
 function showModal(modal){
         modal.classList.remove('d-none');
         showBlurLayer();
+        disableScrolling(cardContainer);
         modal.classList.add('show');
         setTimeout(()=>{
             modal.classList.remove('show');
@@ -103,6 +93,7 @@ function hideModal(){
             hideBlurLayer()
             modal.classList.remove('hide');
         },350)
+    enableScrolling(cardContainer);
 }
 function hideBlurLayer(){
     blur_layer.classList.add('d-none');
@@ -135,7 +126,6 @@ function displayCategoryData(data){
 }
 
 function fillModalwithDetails(details){
-    console.log("defined");
     let modalContent = ``;
     modalContent = `
         <h2>
@@ -163,4 +153,30 @@ function fillModalwithDetails(details){
             <button> <a href="${details.game_url}" target="_blank" >Show Game</a></button>
         </div>`
     modal.innerHTML = modalContent;
+}
+
+function disableScrolling(element) {
+    body.classList.add('disable-scroll');
+}
+function enableScrolling(element) {
+    body.classList.add('enable-scroll');
+}
+function closeDropDownMenu(){
+    hideBlurLayer();
+        nav_menu.classList.add('closed');
+        nav_menu.classList.remove('opened')
+        nav_menu.classList.add('hide-fly');
+        setTimeout(()=>{
+            nav_menu.classList.remove('hide-fly');
+        }, 600)
+}
+
+function showDropDownMenu(){
+    showBlurLayer();
+        nav_menu.classList.remove('closed')
+        nav_menu.classList.add('opened');
+        nav_menu.classList.add('show-fall');
+        setTimeout(()=>{
+            nav_menu.classList.remove('show-fall');
+        },500)
 }
